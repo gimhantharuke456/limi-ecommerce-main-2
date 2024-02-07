@@ -69,31 +69,31 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       icon: Truck,
       href: "/dashboard/sales",
     },
-    {
-      title: "Our Staff",
-      icon: User,
-      href: "/dashboard/staff",
-    },
-    {
-      title: "Green Harvest  Community",
-      icon: Building2,
-      href: "/dashboard/community",
-    },
-    {
-      title: "Wallet",
-      icon: CircleDollarSign,
-      href: "/dashboard/wallet",
-    },
-    {
-      title: "Farmer Support",
-      icon: HeartHandshake,
-      href: "/dashboard/farmer-support",
-    },
-    {
-      title: "Settings",
-      icon: LayoutGrid,
-      href: "/dashboard/settings",
-    },
+    // {
+    //   title: "Our Staff",
+    //   icon: User,
+    //   href: "/dashboard/staff",
+    // },
+    // {
+    //   title: "Green Harvest  Community",
+    //   icon: Building2,
+    //   href: "/dashboard/community",
+    // },
+    // {
+    //   title: "Wallet",
+    //   icon: CircleDollarSign,
+    //   href: "/dashboard/wallet",
+    // },
+    // {
+    //   title: "Farmer Support",
+    //   icon: HeartHandshake,
+    //   href: "/dashboard/farmer-support",
+    // },
+    // {
+    //   title: "Settings",
+    //   icon: LayoutGrid,
+    //   href: "/dashboard/settings",
+    // },
     {
       title: "Online Store",
       icon: ExternalLink,
@@ -111,11 +111,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
       icon: LayoutList,
       href: "/dashboard/categories",
     },
-    {
-      title: "Coupons",
-      icon: ScanSearch,
-      href: "/dashboard/coupons",
-    },
+    // {
+    //   title: "Coupons",
+    //   icon: ScanSearch,
+    //   href: "/dashboard/coupons",
+    // },
     {
       title: "store Banners",
       icon: MonitorPlay,
@@ -161,11 +161,11 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         icon: Boxes,
         href: "/dashboard/products",
       },
-      {
-        title: "Coupons",
-        icon: ScanSearch,
-        href: "/dashboard/coupons",
-      },
+      // {
+      //   title: "Coupons",
+      //   icon: ScanSearch,
+      //   href: "/dashboard/coupons",
+      // },
     ];
   }
   if (role === "USER") {

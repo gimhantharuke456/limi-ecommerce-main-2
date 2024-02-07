@@ -6,13 +6,26 @@ const CommunityPostView = ({ isOpen, onClose, training }) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close-btn" onClick={onClose}>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          style={{
+            position: "absolute",
+            top: 10,
+            right: 10,
+            backgroundColor: "blue",
+            border: "none",
+            cursor: "pointer",
+          }}
+          onClick={onClose}
+        >
           Close
         </button>
         <div>
-          <h2>{training.title}</h2>
-          <p>{training.description}</p>
-          {/* Additional details about the training */}
+          <article class="prose lg:prose-xl">
+            <h1>{training.title}</h1>
+            <p>{training.description}</p>
+            <div dangerouslySetInnerHTML={{ __html: training.content }} />
+          </article>
         </div>
       </div>
     </div>

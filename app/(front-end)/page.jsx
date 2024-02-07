@@ -29,11 +29,11 @@ export default async function Home() {
       })}
 
       <CommunityTrainings />
-      <h2 className="text-4xl">Welcome to Limi Ecommerce </h2>
+      {/* <h2 className="text-4xl">Welcome to Limi Ecommerce </h2>
 
       <Link className="my-4 underline " href="/register-farmer">
         Become a farmer /Vendor/Supplier
-      </Link>
+      </Link> */}
     </div>
   );
 }
