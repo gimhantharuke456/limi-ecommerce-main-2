@@ -41,10 +41,10 @@ export default function SalesInvoice({ order }) {
           <div className="flex justify-between border-b border-gray-500 pb-8">
             <div className="flex flex-col">
               <h2>Bill From:</h2>
-              <p>Shoppify Hardware Store</p>
-              <p>150 Eleign Street</p>
-              <p>Canada</p>
-              <p>shopiifystore@gmail.com</p>
+              <p>Green Harvest</p>
+              <p>Kahatagastanna</p>
+              <p>Sri Lanka</p>
+              <p>greenharvest@gmail.com</p>
             </div>
             <Image
               src={logo}
