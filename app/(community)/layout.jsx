@@ -2,6 +2,7 @@ import RIghsidebar from "@/components/community/shared/RIghsidebar";
 import LeftSidebar from "@/components/community/shared/LeftSidebar";
 import React from "react";
 import Topbar from "@/components/community/shared/Topbar";
+import Bottombar from "@/components/community/shared/Bottombar";
 
 export default function Layout({ children }) {
   return (
@@ -19,6 +20,7 @@ export default function Layout({ children }) {
             </section>
             <RIghsidebar />
           </main>
+          <Bottombar />
         </body>
       </html>
     </div>
