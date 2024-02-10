@@ -40,6 +40,11 @@ export async function POST(request) {
         password: hashedPassword,
         role,
         verificationToken: token,
+        username: name,
+        image: "",
+        threads: [],
+        onboarded: false,
+        communities: [],
       },
     });
     console.log(newUser);
@@ -53,7 +58,7 @@ export async function POST(request) {
         "Thank you, for Creating an Account with Us. We request you to click  on the link Below in order to Complete your onboarding Process. Thankyou";
       const subject = "Account Verification - Green Harvest ";
       const sendMail = await resend.emails.send({
-        from: "Desishub <info@jazzafricaadventures.com>",
+        from: "gimhantharuke456@gmail.com",
         to: email,
         subject: subject,
         react: EmailTemplate({

@@ -10,7 +10,7 @@ async function Page() {
   const session = getServerSession(authOptions);
   const user = (await session).user;
   if (!user) return null;
-
+  console.log(`user --- ${user}`);
   const userInfo = await fetchUser(user.id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 

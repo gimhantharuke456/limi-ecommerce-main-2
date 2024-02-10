@@ -32,7 +32,6 @@ export default function RegisterForm({ role = "USER" }) {
       });
       const responseData = await response.json();
       if (response.ok) {
-        console.log(responseData);
         setLoading(false);
         toast.success("User Created Successfully");
         reset();

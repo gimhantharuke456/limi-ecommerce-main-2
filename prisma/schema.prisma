@@ -152,6 +152,12 @@ model User {
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
   sales              Sale[]
+  username String
+  image String?
+  threads Json[]
+  onboarded Boolean  @default(false)
+  bio       String?
+  communities Json[] 
 }
 
 // Model for normal user profile
