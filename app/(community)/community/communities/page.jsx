@@ -1,6 +1,6 @@
-import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
-
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 import Searchbar from "@/components/shared/Searchbar";
 import Pagination from "@/components/shared/Pagination";
 import CommunityCard from "@/components/cards/CommunityCard";
@@ -9,11 +9,12 @@ import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 
 async function Page({ searchParams }) {
-  const user = await currentUser();
+  const session = getServerSession(authOptions);
+  const user = (await session).user;
   if (!user) return null;
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  if (!userInfo?.onboarded) redirect("/");
 
   const result = await fetchCommunities({
     searchString: searchParams.q,
@@ -26,7 +27,7 @@ async function Page({ searchParams }) {
       <h1 className="head-text">Communities</h1>
 
       <div className="mt-5">
-        <Searchbar routeType="communities" />
+        <Searchbar routeType="community/communities" />
       </div>
 
       <section className="mt-9 flex flex-wrap gap-4">
@@ -50,7 +51,7 @@ async function Page({ searchParams }) {
       </section>
 
       <Pagination
-        path="communities"
+        path="community/communities"
         pageNumber={searchParams?.page ? +searchParams.page : 1}
         isNext={result.isNext}
       />
