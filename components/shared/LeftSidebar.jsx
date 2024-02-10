@@ -16,7 +16,9 @@ const LeftSidebar = () => {
       <div className="flex w-full flex-1 flex-col gap-6 px-6">
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route;
-
+          if (link.route == "/community/profile") {
+            link.route = `/community/profile/65c70077073706f6c95b1f2a`;
+          }
           return (
             <Link
               href={link.route}
