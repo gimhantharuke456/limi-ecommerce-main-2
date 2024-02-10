@@ -1,8 +1,7 @@
-import RIghsidebar from "@/components/community/shared/RIghsidebar";
-import LeftSidebar from "@/components/community/shared/LeftSidebar";
-import React from "react";
-import Topbar from "@/components/community/shared/Topbar";
-import Bottombar from "@/components/community/shared/Bottombar";
+import Bottombar from "@/components/shared/Bottombar";
+import LeftSidebar from "@/components/shared/LeftSidebar";
+import RIghsidebar from "@/components/shared/RIghsidebar";
+import Topbar from "@/components/shared/Topbar";
 
 export default function Layout({ children }) {
   return (
