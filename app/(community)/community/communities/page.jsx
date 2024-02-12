@@ -24,7 +24,7 @@ async function Page({ searchParams }) {
 
   return (
     <>
-      <h1 className="head-text">Communities</h1>
+      <h1 className="text-heading2-bold text-light-1">Communities</h1>
 
       <div className="mt-5">
         <Searchbar routeType="community/communities" />

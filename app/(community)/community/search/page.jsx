@@ -25,13 +25,15 @@ async function Page({ searchParams }) {
 
   return (
     <section>
-      <h1 className="head-text mb-10">Search</h1>
+      <h1 className="text-heading2-bold text-light-1 mb-10">Search</h1>
 
       <Searchbar routeType="search" />
 
       <div className="mt-14 flex flex-col gap-9">
         {result.users.length === 0 ? (
-          <p className="no-result">No Result</p>
+          <p className="text-center !text-base-regular text-light-3">
+            No Result
+          </p>
         ) : (
           <>
             {result.users.map((person) => (

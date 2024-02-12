@@ -10,8 +10,8 @@ function UserCard({ id, name, username, imgUrl, personType }) {
   const isCommunity = personType === "Community";
 
   return (
-    <article className="user-card">
-      <div className="user-card_avatar">
+    <article className="flex flex-col justify-between gap-4 max-xs:rounded-xl max-xs:bg-dark-3 max-xs:p-4 xs:flex-row xs:items-center">
+      <div className="lex flex-1 items-start justify-start gap-3 xs:items-center">
         <div className="relative h-12 w-12">
           <Image
             src={imgUrl}
@@ -28,7 +28,7 @@ function UserCard({ id, name, username, imgUrl, personType }) {
       </div>
 
       <Button
-        className="user-card_btn"
+        className="h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important"
         onClick={() => {
           if (isCommunity) {
             router.push(`/communities/${id}`);

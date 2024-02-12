@@ -9,7 +9,7 @@
   }
 
   /* Head Text */
-  .head-text {
+  .text-heading2-bold text-light-1 {
     @apply text-heading2-bold text-light-1;
   }
 
