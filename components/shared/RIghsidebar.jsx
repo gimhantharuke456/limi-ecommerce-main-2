@@ -54,11 +54,11 @@ async function RightSidebar() {
             <>
               {similarMinds.users.map((person) => (
                 <UserCard
-                  key={person.id}
-                  id={person.id}
+                  key={person._id}
+                  id={person._id}
                   name={person.name}
-                  username={person.username}
-                  imgUrl={person.image}
+                  username={person.username ?? "no"}
+                  imgUrl={person.image ?? person.imageUrl}
                   personType="User"
                 />
               ))}

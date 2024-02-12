@@ -31,9 +31,9 @@ function UserCard({ id, name, username, imgUrl, personType }) {
         className="h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important"
         onClick={() => {
           if (isCommunity) {
-            router.push(`/communities/${id}`);
+            router.push(`/community/communities/${id}`);
           } else {
-            router.push(`/profile/${id}`);
+            router.push(`/community/profile/${id}`);
           }
         }}
       >
