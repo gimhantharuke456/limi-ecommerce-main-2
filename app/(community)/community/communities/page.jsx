@@ -8,6 +8,7 @@ import CommunityCard from "@/components/cards/CommunityCard";
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchCommunities } from "@/lib/actions/community.actions";
 import db from "@/lib/db";
+import CreateCommunityForm from "@/components/community/CreateCommunityForm";
 
 async function Page({ searchParams }) {
   const session = getServerSession(authOptions);
@@ -32,9 +33,6 @@ async function Page({ searchParams }) {
       <div className="flex flex-row justify-between">
         {" "}
         <h1 className="text-heading2-bold text-light-1">Communities</h1>
-        <button className="p-2 h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important">
-          Create Community
-        </button>
       </div>
 
       <div className="mt-5">
@@ -68,6 +66,7 @@ async function Page({ searchParams }) {
         pageNumber={searchParams?.page ? +searchParams.page : 1}
         isNext={result.isNext}
       />
+      <CreateCommunityForm user={user} />
     </>
   );
 }
