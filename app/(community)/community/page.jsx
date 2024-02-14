@@ -7,13 +7,18 @@ import Pagination from "@/components/shared/Pagination";
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
+import db from "@/lib/db";
 
 async function Home({ searchParams }) {
   const session = getServerSession(authOptions);
   const user = (await session).user;
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const result = await fetchPosts(

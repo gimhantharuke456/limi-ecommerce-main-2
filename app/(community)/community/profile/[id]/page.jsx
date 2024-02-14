@@ -10,13 +10,19 @@ import ProfileHeader from "@/components/shared/ProfileHeader";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { fetchUser } from "@/lib/actions/user.actions";
+import db from "@/lib/db";
 
 async function Page({ params }) {
   const session = getServerSession(authOptions);
   const user = (await session).user;
   if (!user) return null;
 
-  const userInfo = await fetchUser(params.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
+
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (

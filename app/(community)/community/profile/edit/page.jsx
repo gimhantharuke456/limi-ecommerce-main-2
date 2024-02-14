@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import AccountProfile from "@/components/forms/AccountProfile";
+import db from "@/lib/db";
 
 // Copy paste most of the code as it is from the /onboarding
 
@@ -12,7 +13,11 @@ async function Page() {
   const user = (await session).user;
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const userData = {

@@ -5,12 +5,17 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 
 import { fetchUser, getActivity } from "@/lib/actions/user.actions";
+import db from "@/lib/db";
 
 async function Page() {
   const session = getServerSession(authOptions);
   const user = (await session).user;
-
-  const userInfo = await fetchUser(user._id);
+  console.log(`===== ${user.id}`);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const activity = await getActivity(userInfo._id);

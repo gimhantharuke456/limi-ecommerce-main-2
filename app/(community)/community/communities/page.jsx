@@ -7,13 +7,18 @@ import CommunityCard from "@/components/cards/CommunityCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchCommunities } from "@/lib/actions/community.actions";
+import db from "@/lib/db";
 
 async function Page({ searchParams }) {
   const session = getServerSession(authOptions);
   const user = (await session).user;
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const result = await fetchCommunities({

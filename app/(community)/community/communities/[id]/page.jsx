@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { currentUser } from "@clerk/nextjs";
+import { authOptions } from "@/lib/authOptions";
+import { getServerSession } from "next-auth";
 
 import { communityTabs } from "@/constants";
 
@@ -11,7 +12,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 
 async function Page({ params }) {
-  const user = await currentUser();
+  const session = getServerSession(authOptions);
+  const user = (await session).user;
   if (!user) return null;
 
   const communityDetails = await fetchCommunityDetails(params.id);

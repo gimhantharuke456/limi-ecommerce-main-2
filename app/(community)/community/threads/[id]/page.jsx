@@ -7,6 +7,7 @@ import ThreadCard from "@/components/cards/ThreadCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
+import db from "@/lib/db";
 
 export const revalidate = 0;
 
@@ -17,7 +18,11 @@ async function page({ params }) {
   const user = (await session).user;
   if (!user) return null;
 
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const thread = await fetchThreadById(params.id);

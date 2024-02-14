@@ -7,13 +7,17 @@ import Searchbar from "@/components/shared/Searchbar";
 import Pagination from "@/components/shared/Pagination";
 
 import { fetchUser, fetchUsers } from "@/lib/actions/user.actions";
+import db from "@/lib/db";
 
 async function Page({ searchParams }) {
   const session = getServerSession(authOptions);
   const user = (await session).user;
   if (!user) return null;
-
-  const userInfo = await fetchUser(user.id);
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const result = await fetchUsers({
