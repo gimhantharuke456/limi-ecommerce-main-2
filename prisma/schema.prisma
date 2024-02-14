@@ -155,7 +155,7 @@ model User {
   username String
   image String?
   threads Json[]
-  onboarded Boolean  @default(false)
+  onboarded Boolean  @default(true)
   bio       String?
   communities Json[] 
 }

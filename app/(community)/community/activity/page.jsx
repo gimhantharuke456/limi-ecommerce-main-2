@@ -9,9 +9,8 @@ import { fetchUser, getActivity } from "@/lib/actions/user.actions";
 async function Page() {
   const session = getServerSession(authOptions);
   const user = (await session).user;
-  if (!user) return null;
-  console.log(`user --- ${user}`);
-  const userInfo = await fetchUser(user.id);
+
+  const userInfo = await fetchUser(user._id);
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   const activity = await getActivity(userInfo._id);
