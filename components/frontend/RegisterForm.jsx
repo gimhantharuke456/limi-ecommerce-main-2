@@ -20,7 +20,6 @@ export default function RegisterForm({ role = "USER" }) {
   const [emailErr, setEmailErr] = useState("");
   async function onSubmit(data) {
     try {
-      console.log(data);
       setLoading(true);
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
       const response = await fetch(`${baseUrl}/api/users`, {
