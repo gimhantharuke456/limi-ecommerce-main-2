@@ -38,7 +38,7 @@ async function page({ params }) {
           author={thread.author}
           community={thread.community}
           createdAt={thread.createdAt}
-          comments={thread.children}
+          comments={thread.children ?? []}
         />
       </div>
 
@@ -46,15 +46,15 @@ async function page({ params }) {
         <Comment
           threadId={params.id}
           currentUserImg={user.imageUrl}
-          currentUserId={JSON.stringify(userInfo._id)}
+          currentUserId={JSON.stringify(userInfo.id)}
         />
       </div>
 
       <div className="mt-10">
         {thread.children.map((childItem) => (
           <ThreadCard
-            key={childItem._id}
-            id={childItem._id}
+            key={childItem.id}
+            id={childItem.id}
             currentUserId={user.id}
             parentId={childItem.parentId}
             content={childItem.text}
