@@ -17,13 +17,14 @@ async function Page() {
       id: user.id,
     },
   });
+
   if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
     <>
       <h1 className="text-heading2-bold text-light-1">Create Thread</h1>
 
-      <PostThread userId={userInfo._id} />
+      <PostThread userId={user.id} communities={userInfo.communities} />
     </>
   );
 }

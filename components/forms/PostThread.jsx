@@ -16,13 +16,17 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
+import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import { fetchCommunityDetails } from "@/lib/actions/community.actions";
 
-function PostThread({ userId }) {
+async function PostThread({ userId, communities }) {
   const router = useRouter();
   const pathname = usePathname();
-
+  const [fetchedCommunities, setFetchCommunities] = useState([]);
+  const [selectedCommunity, setSelectedCommunity] = useState(null);
   const form = useForm({
-    resolver: zodResolver(ThreadValidation),
+    // resolver: zodResolver(ThreadValidation),
     defaultValues: {
       thread: "",
       accountId: userId,
@@ -30,15 +34,37 @@ function PostThread({ userId }) {
   });
 
   const onSubmit = async (values) => {
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: "",
-      path: pathname,
-    });
+    try {
+      if (selectedCommunity) {
+        await createThread({
+          text: values.thread,
+          author: userId,
+          communityId: selectedCommunity,
+          path: pathname,
+        });
+      } else {
+        toast.error(`Please select a community`);
+      }
 
-    router.push("/community");
+      router.push("/community");
+    } catch (err) {
+      toast.error(`${err}`);
+    }
   };
+
+  useEffect(() => {
+    const fetchCommunitiesDetails = async () => {
+      const communityDetailsPromises = communities.map(async (community) => {
+        const comm = await fetchCommunityDetails(community);
+        return { id: comm._id, name: comm.name, username: comm.username };
+      });
+
+      const communitiesDetails = await Promise.all(communityDetailsPromises);
+      setFetchCommunities(communitiesDetails);
+    };
+
+    fetchCommunitiesDetails();
+  }, [communities]);
 
   return (
     <Form {...form}>
@@ -46,6 +72,30 @@ function PostThread({ userId }) {
         className="mt-10 flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
+        <div className="flex w-full flex-col gap-3">
+          <label
+            htmlFor="community"
+            className="text-base-semibold text-light-2"
+          >
+            Select Community
+          </label>
+          <select
+            id="community"
+            className="border border-dark-4 bg-dark-3 text-light-1 p-2"
+            onChange={(e) => setSelectedCommunity(e.target.value)}
+          >
+            <option value="" disabled selected>
+              Choose a community
+            </option>
+            {fetchedCommunities?.map(async (community) => {
+              return (
+                <option key={community.id} value={community.id}>
+                  {community.name}
+                </option>
+              );
+            })}
+          </select>
+        </div>
         <FormField
           control={form.control}
           name="thread"

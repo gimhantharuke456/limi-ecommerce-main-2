@@ -17,7 +17,7 @@ async function Page({ params }) {
   if (!user) return null;
 
   const communityDetails = await fetchCommunityDetails(params.id);
-  console.log("==== c ", communityDetails);
+
   return (
     <section>
       <ProfileHeader
