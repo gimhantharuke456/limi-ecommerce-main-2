@@ -3,12 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 import { sidebarLinks } from "@/constants";
 
-const LeftSidebar = () => {
-  const { data: session, status } = useSession();
+const LeftSidebar = ({ uid }) => {
   const pathname = usePathname();
   const router = useRouter();
   return (
@@ -17,7 +15,7 @@ const LeftSidebar = () => {
         {sidebarLinks.map((link) => {
           const isActive = pathname === link.route;
           if (link.route == "/community/profile") {
-            link.route = `/community/profile/65c70077073706f6c95b1f2a`;
+            link.route = `/community/profile/edit`;
           }
           return (
             <Link
