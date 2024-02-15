@@ -26,6 +26,8 @@ async function Home({ searchParams }) {
     30
   );
 
+  console.log(result);
+
   return (
     <div style={{ color: "white" }}>
       <h1 className="text-heading2-bold text-white text-left">Home</h1>
