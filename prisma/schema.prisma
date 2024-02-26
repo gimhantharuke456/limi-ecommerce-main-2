@@ -18,12 +18,11 @@ model Coupon {
   expiryDate DateTime
   isActive   Boolean
 
-
-  user   User   @relation(fields: [vendorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  user     User   @relation(fields: [vendorId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   vendorId String @db.ObjectId
 
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Banner {
@@ -143,7 +142,7 @@ model User {
   password          String
   emailVerified     Boolean        @default(false)
   products          Product[]
-  coupons          Coupon[]
+  coupons           Coupon[]
   role              UserRole       @default(USER)
   verificationToken String?
   farmerProfile     FarmerProfile?
@@ -151,33 +150,33 @@ model User {
   orders            Order[] //User can have multiple Orders
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
-  sales              Sale[]
-  username String
-  image String?
-  threads Json[]
-  onboarded Boolean  @default(true)
-  bio       String?
-  communities Json[] 
+  sales             Sale[]
+  username          String
+  image             String?
+  threads           Json[]
+  onboarded         Boolean        @default(true)
+  bio               String?
+  communities       Json[]
 }
 
 // Model for normal user profile
 model UserProfile {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  userId      String    @unique @db.ObjectId
-   // Personal Details
-  name     String?
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  userId        String    @unique @db.ObjectId
+  // Personal Details
+  name          String?
   firstName     String?
   lastName      String?
   email         String?
-  username         String?
+  username      String?
   phone         String?
   // shipping details
   streetAddress String?
   city          String?
   country       String?
   district      String?
-  dateOfBirth DateTime?
-  profileImage String?
+  dateOfBirth   DateTime?
+  profileImage  String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -232,7 +231,21 @@ model Order {
   createdAt   DateTime    @default(now())
   updatedAt   DateTime    @updatedAt
   user        User        @relation(fields: [userId], references: [id])
-  sales        Sale[]
+  sales       Sale[]
+}
+
+// schema.prisma
+
+model Farm {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  farmName            String
+  address             String
+  farmImages          String[]
+  contactDetails      String
+  organicCertificates String[]
+  ownedBy             String
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 }
 
 model OrderItem {
@@ -251,18 +264,18 @@ model OrderItem {
 }
 
 model Sale {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  orderId   String   @db.ObjectId
-  productId String   @db.ObjectId
-  vendorId  String   @db.ObjectId
-  total     Float
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId      String   @db.ObjectId
+  productId    String   @db.ObjectId
+  vendorId     String   @db.ObjectId
+  total        Float
   productTitle String
   productImage String
   productPrice Float
-  productQty  Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  order     Order    @relation(fields: [orderId], references: [id])
-  product   Product  @relation(fields: [productId], references: [id])
-  vendor    User     @relation(fields: [vendorId], references: [id])
+  productQty   Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  order        Order    @relation(fields: [orderId], references: [id])
+  product      Product  @relation(fields: [productId], references: [id])
+  vendor       User     @relation(fields: [vendorId], references: [id])
 }

@@ -37,10 +37,11 @@ export default function RegisterForm({ role = "USER" }) {
         //if role =user => home
         //if role= farmer => onboarding
         // const userRole =responseData.data.role
-        if (role === "USER") {
+        if (data.role === "USER") {
           router.push("/");
+        } else if (data.role == "FARMER") {
+          router.push("/register-farmer/" + responseData.data.id);
         } else {
-          router.push("/verify-email");
         }
       } else {
         setLoading(false);

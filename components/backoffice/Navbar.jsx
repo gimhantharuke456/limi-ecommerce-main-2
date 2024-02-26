@@ -11,14 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import React from "react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import ThemeSwitcherBtn from "../ThemeSwitcherBtn";
 import Link from "next/link";
 import UserAvatar from "./UserAvatar";
