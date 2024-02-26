@@ -106,7 +106,7 @@ export default async function page({ params: { id } }) {
 
                               <div className="ml-auto">
                                 <p className="text-sm font-bold text-right text-gray-900 dark:text-gray-300">
-                                  ${item.price}
+                                  LKR {item.price}
                                 </p>
                               </div>
                             </li>
@@ -123,7 +123,7 @@ export default async function page({ params: { id } }) {
                         Sub total
                       </p>
                       <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                        ${subTotal}
+                        LKR {subTotal}
                       </p>
                     </li>
 
@@ -132,7 +132,7 @@ export default async function page({ params: { id } }) {
                         Total
                       </p>
                       <p className="text-base font-bold text-gray-900 dark:text-white">
-                        ${subTotal}
+                        LKR {subTotal}
                       </p>
                     </li>
                   </ul>

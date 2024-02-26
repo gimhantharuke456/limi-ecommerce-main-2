@@ -76,7 +76,7 @@ export default function SalesInvoice({ order }) {
               </div>
               <div className="flex justify-between gap-4">
                 <p>Amount Due</p>
-                <p>${subTotal}</p>
+                <p>LKR {subTotal}</p>
               </div>
             </div>
           </div>
@@ -118,8 +118,8 @@ export default function SalesInvoice({ order }) {
                       </th>
                       <td className="px-6 py-4">Silver</td>
                       <td className="px-6 py-4">{item.quantity}</td>
-                      <td className="px-6 py-4">${item.price}</td>
-                      <td className="px-6 py-4">${itemSubtotal}</td>
+                      <td className="px-6 py-4">LKR {item.price}</td>
+                      <td className="px-6 py-4">LKR {itemSubtotal}</td>
                     </tr>
                   );
                 })}
@@ -135,15 +135,15 @@ export default function SalesInvoice({ order }) {
             <div className="flex flex-col">
               <div className="flex justify-between gap-4">
                 <p>SubTotal</p>
-                <p>${subTotal}</p>
+                <p>LKR {subTotal}</p>
               </div>
               <div className="flex justify-between">
                 <p>Tax</p>
-                <p>${tax}</p>
+                <p>LKR {tax}</p>
               </div>
               <div className="flex justify-between">
                 <p>Total</p>
-                <p>${total}</p>
+                <p>LKR {total}</p>
               </div>
             </div>
           </div>

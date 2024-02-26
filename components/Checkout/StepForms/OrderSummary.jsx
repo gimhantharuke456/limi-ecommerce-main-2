@@ -83,7 +83,7 @@ export default function OrderSummary() {
               <p className="flex-grow py-2 px-4">{cartItem.qty}</p>
             </div>
             <div className="flex items-center gap-2">
-              <h4>LKR{cartItem.salePrice}</h4>
+              <h4>LKR {cartItem.salePrice}</h4>
             </div>
           </div>
         );
