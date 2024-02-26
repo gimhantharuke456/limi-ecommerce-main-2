@@ -134,21 +134,21 @@ export default function Sidebar({ showSidebar, setShowSidebar }) {
         icon: Truck,
         href: "/dashboard/orders",
       },
-      {
-        title: "Wallet",
-        icon: CircleDollarSign,
-        href: "/dashboard/wallet",
-      },
-      {
-        title: "Farmer Support",
-        icon: HeartHandshake,
-        href: "/dashboard/farmer-support",
-      },
-      {
-        title: "Settings",
-        icon: LayoutGrid,
-        href: "/dashboard/settings",
-      },
+      // {
+      //   title: "Wallet",
+      //   icon: CircleDollarSign,
+      //   href: "/dashboard/wallet",
+      // },
+      // {
+      //   title: "Farmer Support",
+      //   icon: HeartHandshake,
+      //   href: "/dashboard/farmer-support",
+      // },
+      // {
+      //   title: "Settings",
+      //   icon: LayoutGrid,
+      //   href: "/dashboard/settings",
+      // },
       {
         title: "Online Store",
         icon: ExternalLink,

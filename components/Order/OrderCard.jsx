@@ -40,7 +40,7 @@ export default function OrderCard({ order }) {
                   Total Amount
                 </p>
                 <p className="text-sm font-bold text-gray-900 mt-0.5">
-                  ${subTotal}
+                  LKR {subTotal}
                 </p>
               </div>
 
@@ -106,7 +106,7 @@ export default function OrderCard({ order }) {
                               {item.quantity}
                             </p>
                             <p className="text-base font-bold text-left text-gray-900 sm:text-right">
-                              ${item.price}
+                              LKR {item.price}
                             </p>
                           </div>
                         </div>
