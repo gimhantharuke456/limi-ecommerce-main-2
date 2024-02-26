@@ -62,15 +62,24 @@ export default function RegisterForm({ role = "USER" }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="">
-      <TextInput
-        label=""
-        name="role"
-        register={register}
-        errors={errors}
-        type="hidden"
-        defaultValue={role}
-        className="sm:col-span-2 mb-3"
-      />
+      <div className="mb-3">
+        <label
+          htmlFor="role"
+          className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50 mb-2 "
+        >
+          Who are you
+        </label>
+        <select
+          id="role"
+          name="role"
+          {...register("role")}
+          className="block w-full rounded-md border-0 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-slate-500 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-lime-700 dark:focus:ring-slate-500 sm:text-sm sm:leading-6 dark:bg-transparent dark:text-slate-100"
+        >
+          <option value="USER">User</option>
+          <option value="CONSULTANT">Consultant</option>
+          <option value="FARMER">Farmer</option>
+        </select>
+      </div>
       <TextInput
         label="Your Full Name"
         name="name"
