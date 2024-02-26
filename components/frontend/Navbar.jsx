@@ -40,7 +40,7 @@ export default function Navbar() {
             <UserAvatar user={session?.user} />
           )}
 
-          <HelpModal />
+          {/* <HelpModal /> */}
           <CartCount />
         </div>
         <ThemeSwitcherBtn />

@@ -53,7 +53,7 @@ export default function CartProduct({ cartItem }) {
         </button>
       </div>
       <div className="flex items-center gap-2">
-        <h4>UGX{cartItem.salePrice}</h4>
+        <h4>LKR{cartItem.salePrice}</h4>
         <button onClick={() => handleCartItemDelete(cartItem.id)}>
           <Trash2 className="text-red-600 w-5 h-5" />
         </button>
