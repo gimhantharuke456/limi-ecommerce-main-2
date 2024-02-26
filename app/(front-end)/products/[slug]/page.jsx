@@ -32,16 +32,13 @@ export default async function ProductDetailPage({ params: { slug } }) {
             <h2 className="text-xl lg:text-3xl font-semibold">
               {product.title}
             </h2>
-            <button>
-              <Share2 />
-            </button>
           </div>
           <div className="border-b border-gray-500">
             <p className="py-2 ">{product.description}</p>
             <div className="flex items-center gap-8 mb-4">
               <p>SKU: {product.sku}</p>
               <p className="bg-lime-200 py-1.5 px-4 rounded-full text-slate-900 ">
-                <b>Stock</b>: {product.qty}
+                <b>Stock</b>: {`${product.productStock} ${product.unit}`}
               </p>
             </div>
           </div>
@@ -54,63 +51,14 @@ export default async function ProductDetailPage({ params: { slug } }) {
             </div>
             <p className="flex items-center">
               <Tag className="w-5 h-5 text-slate-400 me-2" />
-              <span>Save 50% right now</span>
+              <span>
+                Save {(product.productPrice - product.salePrice) / 100}% right
+                now
+              </span>
             </p>
           </div>
           <div className="flex justify-between items-center py-6">
             <AddToCartButton product={product} />
-            <p>Something Here</p>
-          </div>
-        </div>
-        <div className="col-span-3 sm:block bg-white border border-gray-300 rounded-lg  dark:bg-gray-700 dark:border-gray-700 text-slate-800 overflow-hidden hidden">
-          <h2 className="bg-slate-100 dark:bg-gray-800 py-3 px-6 font-semibold border-b border-gray-300 dark:border-gray-600 text-slate-800 dark:text-slate-100">
-            DELIVERY & RETURNS
-          </h2>
-
-          <div className="p-4">
-            <div className="flex rounded-lg py-2 px-4 bg-orange-400 text-slate-50 items-center gap-3">
-              <span>Green Harvest Express </span>
-              <Send />
-            </div>
-            <div className="py-3 text-slate-100 border-b border-gray-500">
-              Eligible for Free Delivery.
-              <Link href="#">View Details</Link>
-            </div>
-            <h2 className="text-slate-200 py-2">Choose your Location</h2>
-            <div className=" pb-3">
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option>
-              </select>
-            </div>
-
-            <div className="pb-3">
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option>
-              </select>
-            </div>
-            <div className="pb-3">
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>France</option>
-                <option>Germany</option>
-              </select>
-            </div>
           </div>
         </div>
       </div>
