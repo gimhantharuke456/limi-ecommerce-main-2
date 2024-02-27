@@ -46,7 +46,13 @@ export default function UserAvatar({ user = {} }) {
         <DropdownMenuLabel>{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          {emailVerified && (
+          {role == "FARMER" && (
+            <Link href="/dashboard" className="flex items-center space-x-2">
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              <span>Dashboard</span>
+            </Link>
+          )}
+          {role == "ADMIN" && (
             <Link href="/dashboard" className="flex items-center space-x-2">
               <LayoutDashboard className="mr-2 h-4 w-4" />
               <span>Dashboard</span>

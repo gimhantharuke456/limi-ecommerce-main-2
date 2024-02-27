@@ -32,15 +32,14 @@ export default async function Home() {
         },
       });
       if (!farm) {
-        if (!userInfo?.emailVerified) {
-          redirect("/register-farmer/" + userInfo?.id);
-        }
+        redirect("/register-farmer/" + userInfo?.id);
       } else {
-        return (
-          <div className="min-h-screen flex justify-center items-center">
-            <h1>Please wait your farm is not accepted yet</h1>
-          </div>
-        );
+        if (!userInfo?.emailVerified)
+          return (
+            <div className="min-h-screen flex justify-center items-center">
+              <h1>Please wait your farm is not accepted yet</h1>
+            </div>
+          );
       }
     }
   }
