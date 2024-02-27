@@ -7,6 +7,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth";
+import db from "@/lib/db";
+import { redirect } from "next/navigation";
+import toast from "react-hot-toast";
 export default async function Home() {
   const categoriesData = await getData("categories");
   const categories = categoriesData.filter((category) => {
@@ -14,7 +17,33 @@ export default async function Home() {
   });
 
   const session = await getServerSession(authOptions);
-  console.log(session?.user);
+  const user = session?.user;
+  if (!user) return redirect("/login");
+  const userInfo = await db.user.findUnique({
+    where: {
+      id: user.id,
+    },
+  });
+  if (userInfo != null) {
+    if (userInfo?.role == "FARMER") {
+      const farm = await db.farm.findFirst({
+        where: {
+          ownedBy: userInfo?.id,
+        },
+      });
+      if (!farm) {
+        if (!userInfo?.emailVerified) {
+          redirect("/register-farmer/" + userInfo?.id);
+        }
+      } else {
+        return (
+          <div className="min-h-screen flex justify-center items-center">
+            <h1>Please wait your farm is not accepted yet</h1>
+          </div>
+        );
+      }
+    }
+  }
   return (
     <div className="min-h-screen">
       <Hero />

@@ -34,7 +34,6 @@ export default function LoginForm() {
         setLoading(false);
         toast.error("Sign-in error: Check your credentials");
       } else {
-        // Sign-in was successful
         toast.success("Login Successful");
         reset();
         router.push("/");

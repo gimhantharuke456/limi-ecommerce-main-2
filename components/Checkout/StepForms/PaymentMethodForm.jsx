@@ -5,7 +5,10 @@ import { useForm } from "react-hook-form";
 import NavButtons from "../NavButtons";
 import { Circle, CreditCard, HeartHandshake, Truck } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentStep, updateCheckoutFormData } from "@/redux/slices/checkoutSlice";
+import {
+  setCurrentStep,
+  updateCheckoutFormData,
+} from "@/redux/slices/checkoutSlice";
 
 export default function PaymentMethodForm() {
   const dispatch = useDispatch();
@@ -61,6 +64,12 @@ export default function PaymentMethodForm() {
               <label
                 for="hosting-small"
                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
+                style={{
+                  backgroundColor:
+                    paymentMethod == "Cash On Delivery"
+                      ? "black"
+                      : "transparent",
+                }}
               >
                 {/* Design */}
                 <div className="flex gap-2 items-center">
@@ -81,6 +90,10 @@ export default function PaymentMethodForm() {
               />
               <label
                 for="hosting-big"
+                style={{
+                  backgroundColor:
+                    paymentMethod == "Credit Card" ? "black" : "transparent",
+                }}
                 class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700"
               >
                 <div className="flex gap-2 items-center">
