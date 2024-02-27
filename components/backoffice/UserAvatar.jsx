@@ -15,7 +15,7 @@ import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { generateInitials } from "@/lib/generateInitials";
 export default function UserAvatar({ user = {} }) {
-  const { name, image } = user;
+  const { name, image, emailVerified } = user;
   const initials = generateInitials(name);
   const role = user?.role;
   const router = useRouter();
@@ -46,12 +46,14 @@ export default function UserAvatar({ user = {} }) {
         <DropdownMenuLabel>{name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/dashboard" className="flex items-center space-x-2">
-            <LayoutDashboard className="mr-2 h-4 w-4" />
-            <span>Dashboard</span>
-          </Link>
+          {emailVerified && (
+            <Link href="/dashboard" className="flex items-center space-x-2">
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              <span>Dashboard</span>
+            </Link>
+          )}
         </DropdownMenuItem>
-        <DropdownMenuItem>
+        {/* <DropdownMenuItem>
           <Link
             href="/dashboard/profile"
             className="flex items-center space-x-2"
@@ -59,7 +61,7 @@ export default function UserAvatar({ user = {} }) {
             <Settings className="mr-2 h-4 w-4" />
             <span>Edit Profile</span>
           </Link>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         {role === "USER" && (
           <DropdownMenuItem>
             <Link
