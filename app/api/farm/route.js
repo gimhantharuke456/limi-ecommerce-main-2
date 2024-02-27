@@ -41,18 +41,60 @@ export async function POST(request) {
 
 export async function GET(request) {
   try {
-    const farms = await db.farm.findMany({
-      orderBy: {
-        createdAt: "desc",
+    const { id } = request.params;
+
+    const farm = await db.farm.findUnique({
+      where: {
+        ownedBy: id,
       },
     });
 
-    return NextResponse.json(farms);
+    if (!farm) {
+      return NextResponse.json(
+        {
+          message: "Farm not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(farm);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
       {
-        message: "Failed to Fetch Farms",
+        message: "Failed to fetch farm",
+        error,
+      },
+      { status: 500 }
+    );
+  }
+}
+export async function GET_FARM_BY_ID(request) {
+  try {
+    const { id } = request.params;
+
+    const farm = await db.farm.findUnique({
+      where: {
+        id,
+      },
+    });
+
+    if (!farm) {
+      return NextResponse.json(
+        {
+          message: "Farm not found",
+        },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json(farm);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(
+      {
+        message: "Failed to fetch farm",
         error,
       },
       { status: 500 }

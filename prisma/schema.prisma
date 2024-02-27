@@ -243,7 +243,7 @@ model Farm {
   farmImages          String[]
   contactDetails      String
   organicCertificates String[]
-  ownedBy             String
+  ownedBy             String   @unique @db.ObjectId
   createdAt           DateTime @default(now())
   updatedAt           DateTime @updatedAt
 }
