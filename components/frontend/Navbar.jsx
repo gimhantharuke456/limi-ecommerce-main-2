@@ -12,9 +12,6 @@ import { useSession } from "next-auth/react";
 import UserAvatar from "../backoffice/UserAvatar";
 export default function Navbar() {
   const { data: session, status } = useSession();
-  if (status === "loading") {
-    return <p>Loading...</p>;
-  }
 
   return (
     <div className="bg-white dark:bg-slate-700">

@@ -58,6 +58,15 @@ export default function UserAvatar({ user = {} }) {
               <span>Dashboard</span>
             </Link>
           )}
+          {role == "CONSULTANT" && (
+            <Link
+              href={`/dashboard/consultant/${user.id}`}
+              className="flex items-center space-x-2"
+            >
+              <LayoutDashboard className="mr-2 h-4 w-4" />
+              <span>Dashboard</span>
+            </Link>
+          )}
         </DropdownMenuItem>
         {/* <DropdownMenuItem>
           <Link
