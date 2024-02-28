@@ -17,8 +17,9 @@ export default function Navbar() {
     <div className="bg-white dark:bg-slate-700">
       <div className="flex items-center justify-between py-3 max-w-6xl mx-auto px-8 gap-8">
         {/* Logo */}
-        <Link className="" href="/">
+        <Link className="flex-col" href="/">
           <Image src={logo} alt="Green Harvest food logo" className="w-24" />
+          <p>Green Harvest</p>
         </Link>
         {/* SEARCH */}
         <div className="flex-grow">

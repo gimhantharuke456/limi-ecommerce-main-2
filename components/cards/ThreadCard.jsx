@@ -15,6 +15,7 @@ function ThreadCard({
   comments,
   isComment,
 }) {
+  console.log(`author is ${author.name}`);
   return (
     <article
       className={`flex w-full flex-col rounded-xl ${
