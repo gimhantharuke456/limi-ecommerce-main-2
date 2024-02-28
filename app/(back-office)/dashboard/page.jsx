@@ -22,11 +22,11 @@ export default async function page() {
     <div>
       <Heading title="Dashboard Overview" />
       {/* Large Cards */}
-      <LargeCards />
+      {/* <LargeCards /> */}
       {/* Small cards */}
-      <SmallCards />
+      {/* <SmallCards /> */}
       {/* Charts */}
-      <DashboardCharts />
+      {/* <DashboardCharts /> */}
       {/* Recent Orders Table */}
       {/* <CustomDataTable /> */}
     </div>
