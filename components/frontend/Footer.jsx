@@ -224,7 +224,7 @@ const Footer = () => {
         <hr className="mt-16 mb-10 border-gray-200" />
 
         <p className="text-sm text-center text-gray-600">
-          © Copyright 2021, All Rights Reserved by Green Harvest LTD
+          © Copyright 2024, All Rights Reserved by Green Harvest LTD
         </p>
       </div>
     </section>

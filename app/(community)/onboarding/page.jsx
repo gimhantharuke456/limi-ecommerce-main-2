@@ -15,8 +15,8 @@ async function Page() {
   if (userInfo?.onboarded) redirect("/community");
 
   const userData = {
-    id: user._id,
-    objectId: userInfo?._id,
+    id: user.id,
+    objectId: userInfo?.id,
     username: userInfo ? userInfo?.username : user.username,
     name: userInfo ? userInfo?.name : user.firstName ?? "",
     bio: userInfo ? userInfo?.bio : "",

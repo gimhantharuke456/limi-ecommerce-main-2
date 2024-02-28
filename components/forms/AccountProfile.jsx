@@ -52,14 +52,16 @@ const AccountProfile = ({ user, btnTitle }) => {
       }
     }
 
-    await updateUser({
-      name: values.name,
-      path: pathname,
-      username: values.username,
-      userId: user.id,
-      bio: values.bio,
-      image: values.profile_photo,
-    });
+    try {
+      await updateUser({
+        name: values.name,
+        path: pathname,
+        username: values.username,
+        userId: user.id,
+        bio: values.bio,
+        image: values.profile_photo,
+      });
+    } catch (err) {}
 
     if (pathname === "/profile/edit") {
       router.back();
