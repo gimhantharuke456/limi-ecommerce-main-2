@@ -1,9 +1,16 @@
 import FormHeader from "@/components/backoffice/FormHeader";
 import NewProductForm from "@/components/backoffice/NewProductForm";
+import { authOptions } from "@/lib/authOptions";
 import { getData } from "@/lib/getData";
+import { getServerSession } from "next-auth";
 import React from "react";
 
 export default async function NewProduct() {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return null;
+  }
+  const user = session?.user;
   //Categories and Farmers
   const categoriesData = await getData("categories");
   const usersData = (await getData("users")) ?? [];
@@ -27,8 +34,12 @@ export default async function NewProduct() {
   });
   return (
     <div>
-      <FormHeader title="New Product" />
-      <NewProductForm categories={categories} farmers={farmers} />
+      <FormHeader title={`Add Product`} />
+      <NewProductForm
+        uid={user?.id}
+        categories={categories}
+        farmers={farmers}
+      />
     </div>
   );
 }

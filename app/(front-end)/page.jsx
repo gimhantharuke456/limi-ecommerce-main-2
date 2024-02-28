@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import db from "@/lib/db";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
+import ConsultantList from "@/components/consultant/ConsultantList";
 export default async function Home() {
   const categoriesData = await getData("categories");
   const categories = categoriesData.filter((category) => {
@@ -18,31 +19,42 @@ export default async function Home() {
 
   const session = await getServerSession(authOptions);
   const user = session?.user;
-  if (!user) return redirect("/login");
-  const userInfo = await db.user.findUnique({
-    where: {
-      id: user.id,
-    },
-  });
-  if (userInfo != null) {
-    if (userInfo?.role == "FARMER") {
-      const farm = await db.farm.findFirst({
-        where: {
-          ownedBy: userInfo?.id,
-        },
-      });
-      if (!farm) {
-        redirect("/register-farmer/" + userInfo?.id);
-      } else {
-        if (!userInfo?.emailVerified)
-          return (
-            <div className="min-h-screen flex justify-center items-center">
-              <h1>Please wait your farm is not accepted yet</h1>
-            </div>
-          );
+  // if (!user) return redirect("/login");
+  if (user) {
+    const userInfo = await db.user.findUnique({
+      where: {
+        id: user.id,
+      },
+    });
+    if (userInfo != null) {
+      if (!userInfo?.emailVerified) {
+        if (userInfo?.role == "FARMER") {
+          const farm = await db.farm.findFirst({
+            where: {
+              ownedBy: userInfo?.id,
+            },
+          });
+          console.log("Farm:", farm);
+          if (!farm) {
+            console.log("No farm found");
+            redirect("/register-farmer/" + userInfo?.id);
+          } else {
+            if (!userInfo?.emailVerified)
+              return (
+                <div className="min-h-screen flex justify-center items-center">
+                  <h1>Please wait your farm is not accepted yet</h1>
+                </div>
+              );
+          }
+        }
       }
     }
   }
+  const consultants = await db.user.findMany({
+    where: {
+      role: "CONSULTANT",
+    },
+  });
   return (
     <div className="min-h-screen">
       <Hero />
@@ -57,11 +69,8 @@ export default async function Home() {
       })}
 
       <CommunityTrainings />
-      {/* <h2 className="text-4xl">Welcome to Limi Ecommerce </h2>
-
-      <Link className="my-4 underline " href="/register-farmer">
-        Become a farmer /Vendor/Supplier
-      </Link> */}
+      <div style={{ height: 15 }} />
+      {/* <ConsultantList consultants={consultants} user={user} /> */}
     </div>
   );
 }

@@ -20,12 +20,11 @@ export default async function page() {
   const id = session?.user?.id;
   const farmerProducts = allProducts.filter((product) => product.userId === id);
 
-  console.log(id);
   return (
     <div>
       {/* Header */}
       <PageHeader
-        heading="Products"
+        heading={`Add Product`}
         href="/dashboard/products/new"
         linkTitle="Add Product"
       />

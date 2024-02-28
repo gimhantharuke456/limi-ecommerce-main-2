@@ -21,6 +21,7 @@ export default function NewProductForm({
   categories,
   farmers,
   updateData = {},
+  uid,
 }) {
   console.log(updateData);
   const initialImageUrl = updateData?.imageUrl ?? "";
@@ -61,23 +62,24 @@ export default function NewProductForm({
     data.tags = tags;
     data.qty = 1;
     data.productCode = productCode;
-    console.log(data);
+
     if (id) {
       data.id = id;
       // Make Put Request (Update)
       makePutRequest(
         setLoading,
         `api/products/${id}`,
-        data,
+        { ...data, userId: uid },
         "Product",
         redirect
       );
       console.log("update Request: ", data);
     } else {
+      console.log("create Request: ", { ...data, userId: uid });
       makePostRequest(
         setLoading,
         "api/products",
-        data,
+        { ...data, userId: uid },
         "Product",
         reset,
         redirect
