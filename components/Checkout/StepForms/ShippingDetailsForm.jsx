@@ -107,7 +107,7 @@ export default function ShippingDetailsForm() {
                   <Truck className="w-8 h-8 ms-3 flex-shrink-0 " />
                   <div className="">
                     <p>UPS</p>
-                    <p>Delivery Cost: $8</p>
+                    <p>Delivery Cost: LKR 100</p>
                   </div>
                 </div>
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />
@@ -136,7 +136,7 @@ export default function ShippingDetailsForm() {
                   <Truck className="w-8 h-8 ms-3 flex-shrink-0 " />
                   <div className="">
                     <p>UPS</p>
-                    <p>Delivery Cost: $20</p>
+                    <p>Delivery Cost: LKR 200</p>
                   </div>
                 </div>
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />

@@ -50,7 +50,7 @@ export default function PaymentMethodForm() {
           <h3 class="mb-5 text-lg font-medium text-gray-900 dark:text-white">
             Which Payment Method do You Prefer ?
           </h3>
-          <ul class="grid w-full gap-6 md:grid-cols-2">
+          <ul class="grid w-full gap-6 md:grid-cols-2 justify-center items-center">
             <li>
               <input
                 type="radio"
@@ -79,7 +79,7 @@ export default function PaymentMethodForm() {
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />
               </label>
             </li>
-            <li>
+            {/* <li>
               <input
                 type="radio"
                 id="hosting-big"
@@ -102,7 +102,7 @@ export default function PaymentMethodForm() {
                 </div>
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />
               </label>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
