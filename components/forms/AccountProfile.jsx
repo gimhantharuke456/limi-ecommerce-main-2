@@ -66,7 +66,7 @@ const AccountProfile = ({ user, btnTitle }) => {
     if (pathname === "/profile/edit") {
       router.back();
     } else {
-      router.push("/");
+      router.push("/community");
     }
   };
 

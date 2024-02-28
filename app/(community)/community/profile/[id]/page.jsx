@@ -21,7 +21,7 @@ async function Page({ params }) {
     },
   });
 
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  // if (!userInfo?.onboarded) redirect("/onboarding");
 
   return (
     <section>

@@ -19,7 +19,7 @@ async function Home({ searchParams }) {
       id: user.id,
     },
   });
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  // if (!userInfo?.onboarded) redirect("/onboarding");
 
   const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,

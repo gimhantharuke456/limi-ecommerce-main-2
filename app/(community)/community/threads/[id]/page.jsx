@@ -23,7 +23,7 @@ async function page({ params }) {
       id: user.id,
     },
   });
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  // if (!userInfo?.onboarded) redirect("/onboarding");
 
   const thread = await fetchThreadById(params.id);
 

@@ -18,7 +18,7 @@ async function Page() {
       id: user.id,
     },
   });
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  // if (!userInfo?.onboarded) redirect("/onboarding");
 
   const userData = {
     id: user.id,

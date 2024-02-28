@@ -18,7 +18,7 @@ async function Page({ searchParams }) {
       id: user.id,
     },
   });
-  if (!userInfo?.onboarded) redirect("/onboarding");
+  // if (!userInfo?.onboarded) redirect("/onboarding");
 
   const result = await fetchUsers({
     userId: user.id,
