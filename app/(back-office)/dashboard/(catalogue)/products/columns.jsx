@@ -44,6 +44,10 @@ export const columns = [
     accessorKey: "isActive",
     header: "Active",
   },
+  {
+    accessorKey: "productStock",
+    header: "Stock (KG)",
+  },
 
   {
     accessorKey: "createdAt",

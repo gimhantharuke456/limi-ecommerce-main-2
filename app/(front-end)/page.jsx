@@ -14,7 +14,7 @@ import ConsultantList from "@/components/consultant/ConsultantList";
 export default async function Home() {
   const categoriesData = await getData("categories");
   const categories = categoriesData.filter((category) => {
-    return category.products.length > 3;
+    return category.products.length > 8;
   });
 
   const session = await getServerSession(authOptions);

@@ -32,7 +32,9 @@ export default function Product({ product }) {
           </h2>
         </Link>
         <div className="flex items-center justify-between gap-2 pb-3 dark:text-slate-200 text-slate-800">
-          <p>LKR {product.salePrice}</p>
+          <p>
+            LKR {product.salePrice} (1 {product.unit})
+          </p>
           <button
             onClick={() => handleAddToCart()}
             className="flex items-center space-x-2 bg-lime-600 px-4 py-2 rounded-md text-white"
