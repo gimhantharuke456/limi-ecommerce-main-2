@@ -62,7 +62,6 @@ export default async function ConsultantList({ consultants, user }) {
               >
                 <Image
                   src={
-                    consultant.image !== "" ??
                     "https://utfs.io/f/4d0a7431-bb89-4db8-86e5-882d528cc023-no7jkf.webp"
                   }
                   alt={consultant.id}
@@ -81,22 +80,6 @@ export default async function ConsultantList({ consultants, user }) {
           })}
         </Carousel>
       </div>
-      <Modal
-        show={chatModalOpen}
-        containerClassName={`modal-container ${customModalOverlayClass}`}
-        onClose={() => {
-          setChatModalOpen(false);
-        }}
-        title={`Viewing Chat`}
-        containerStyle={{ background: "dark:bg-gray-800", width: 800 }}
-      >
-        <div className="bg-white dark:bg-slate-700 p-4">
-          <ChatBox
-            consultantId={`${selectedConsultant.id}`}
-            userId={`${user.id}`}
-          />
-        </div>
-      </Modal>
     </div>
   );
 }

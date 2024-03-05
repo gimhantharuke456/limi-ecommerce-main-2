@@ -70,7 +70,9 @@ export default async function Home() {
 
       <CommunityTrainings />
       <div style={{ height: 15 }} />
-      {/* <ConsultantList consultants={consultants} user={user} /> */}
+      {user.role !== "CONSULTANT" && (
+        <ConsultantList consultants={consultants} user={user} />
+      )}
     </div>
   );
 }
