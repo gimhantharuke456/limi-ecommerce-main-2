@@ -10,6 +10,8 @@ import { FaGithub } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { getData } from "@/lib/getData";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebaseConfig";
 export default function LoginForm() {
   const router = useRouter();
   const {
@@ -34,6 +36,7 @@ export default function LoginForm() {
         setLoading(false);
         toast.error("Sign-in error: Check your credentials");
       } else {
+        signInWithEmailAndPassword(auth, data.email, data.password);
         toast.success("Login Successful");
         reset();
         router.push("/");

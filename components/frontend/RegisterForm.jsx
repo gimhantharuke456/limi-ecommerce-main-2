@@ -7,6 +7,9 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import SubmitButton from "../FormInputs/SubmitButton";
 import TextInput from "../FormInputs/TextInput";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "@/firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function RegisterForm({ role = "USER" }) {
   const router = useRouter(); // Redirecting on the client side
@@ -32,6 +35,16 @@ export default function RegisterForm({ role = "USER" }) {
       const responseData = await response.json();
       if (response.ok) {
         setLoading(false);
+        await createUserWithEmailAndPassword(auth, data.email, data.password);
+        await setDoc(doc(db, "users", auth.currentUser?.uid), {
+          uid: auth.currentUser.uid,
+          displayName: data.name,
+          email: data.email,
+          photoURL: "downloadURL",
+        });
+
+        //create empty user chats on firestore
+        await setDoc(doc(db, "userChats", auth.currentUser.uid), {});
         toast.success("User Created Successfully");
         reset();
         //if role =user => home
