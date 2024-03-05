@@ -70,7 +70,7 @@ export default async function Home() {
 
       <CommunityTrainings />
       <div style={{ height: 15 }} />
-      {user.role !== "CONSULTANT" && (
+      {user?.role !== "CONSULTANT" && (
         <ConsultantList consultants={consultants} user={user} />
       )}
     </div>

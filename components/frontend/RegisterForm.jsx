@@ -34,7 +34,6 @@ export default function RegisterForm({ role = "USER" }) {
       });
       const responseData = await response.json();
       if (response.ok) {
-        setLoading(false);
         await createUserWithEmailAndPassword(auth, data.email, data.password);
         await setDoc(doc(db, "users", auth.currentUser?.uid), {
           uid: auth.currentUser.uid,
@@ -44,7 +43,16 @@ export default function RegisterForm({ role = "USER" }) {
         });
 
         //create empty user chats on firestore
-        await setDoc(doc(db, "userChats", auth.currentUser.uid), {});
+        await setDoc(doc(db, "userChats", auth.currentUser.uid), {
+          userInfo: {
+            uid: auth.currentUser.uid,
+            displayName: data.name,
+            email: data.email,
+            photoURL:
+              "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
+          },
+        });
+        setLoading(false);
         toast.success("User Created Successfully");
         reset();
         //if role =user => home

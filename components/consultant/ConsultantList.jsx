@@ -1,14 +1,18 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Modal, { closeStyle } from "simple-react-modal";
 import ChatBox from "./ChatBox";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "@/firebaseConfig";
+import { ChatContext } from "@/context/ChatContex";
+import { useRouter } from "next/navigation";
 const customModalOverlayClass = "custom-modal-overlay";
 export default async function ConsultantList({ consultants, user }) {
-  const [chatModalOpen, setChatModalOpen] = useState(false);
-  const [selectedConsultant, setSelectedConsultant] = useState(null);
+  const router = useRouter();
+  const { dispatch } = useContext(ChatContext);
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -53,9 +57,19 @@ export default async function ConsultantList({ consultants, user }) {
           {consultants.map((consultant, index) => {
             return (
               <div
-                onClick={() => {
-                  setChatModalOpen(true);
-                  setSelectedConsultant(consultant);
+                onClick={async () => {
+                  const q = query(
+                    collection(db, "users"),
+                    where("email", "==", consultant.email)
+                  );
+
+                  const querySnapshot = await getDocs(q);
+                  querySnapshot.forEach((doc) => {
+                    console.log(doc.id, " => ", doc.data());
+                    dispatch({ type: "CHANGE_USER", payload: doc.data() });
+                    router.push(`consultant/${consultant.id}`);
+                    return;
+                  });
                 }}
                 key={index}
                 className="rounded-lg mr-3 bg-slate-100  dark:bg-slate-900 overflow-hidden cursor-pointer"
