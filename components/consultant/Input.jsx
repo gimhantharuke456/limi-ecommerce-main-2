@@ -12,6 +12,7 @@ import { v4 as uuid } from "uuid";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { AuthContext } from "@/context/AuthContext";
 import { ChatContext } from "@/context/ChatContex";
+import { Button } from "../ui/button";
 
 const Input = () => {
   const [text, setText] = useState("");
@@ -82,13 +83,14 @@ const Input = () => {
       />
       <div className="send">
         <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           type="file"
           style={{ display: "none" }}
           id="file"
           onChange={(e) => setImg(e.target.files[0])}
         />
         <label htmlFor="file"></label>
-        <button onClick={handleSend}>Send</button>
+        <Button onClick={handleSend}>Send</Button>
       </div>
     </div>
   );

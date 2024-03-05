@@ -40,7 +40,7 @@ export default function RegisterForm({ role = "USER" }) {
           uid: auth.currentUser.uid,
           displayName: data.name,
           email: data.email,
-          photoURL: "downloadURL",
+          photoURL: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
         });
 
         //create empty user chats on firestore
