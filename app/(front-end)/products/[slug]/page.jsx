@@ -1,6 +1,7 @@
 import AddToCartButton from "@/components/frontend/AddToCartButton";
 import Breadcrumb from "@/components/frontend/Breadcrumb";
 import CategoryCarousel from "@/components/frontend/CategoryCarousel";
+import Reviews from "@/components/reviews/Reviews";
 import { getData } from "@/lib/getData";
 import { BaggageClaim, Minus, Plus, Send, Share2, Tag } from "lucide-react";
 import Image from "next/image";
@@ -14,6 +15,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
   const category = await getData(`categories/${catId}`);
   const categoryProducts = category.products;
   const products = categoryProducts.filter((product) => product.id !== id);
+
   return (
     <div>
       <Breadcrumb />
@@ -62,6 +64,7 @@ export default async function ProductDetailPage({ params: { slug } }) {
           </div>
         </div>
       </div>
+      <Reviews pid={id} />
       <div className="bg-white dark:bg-slate-700 my-8 rounded-xl p-4">
         <h2 className="mb-4 text-xl font-semibold text-slate-200 ml-3">
           Similar Products
