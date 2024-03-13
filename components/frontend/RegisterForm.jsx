@@ -39,6 +39,7 @@ export default function RegisterForm({ role = "USER" }) {
           uid: auth.currentUser.uid,
           displayName: data.name,
           email: data.email,
+          mId: responseData.data.id,
           photoURL: "https://cdn-icons-png.flaticon.com/512/10337/10337609.png",
         });
 
@@ -62,8 +63,8 @@ export default function RegisterForm({ role = "USER" }) {
           router.push("/");
         } else if (data.role == "FARMER") {
           router.push("/register-farmer/" + responseData.data.id);
-        } else {
-          router.push("/");
+        } else if (data.role === "CONSULTANT") {
+          router.push("/register-consultant/" + responseData.data.id);
         }
       } else {
         setLoading(false);

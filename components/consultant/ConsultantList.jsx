@@ -67,7 +67,7 @@ export default async function ConsultantList({ consultants, user }) {
                   querySnapshot.forEach((doc) => {
                     console.log(doc.id, " => ", doc.data());
                     dispatch({ type: "CHANGE_USER", payload: doc.data() });
-                    router.push(`consultant/${consultant.id}`);
+                    router.push(`consultant/details/${consultant.id}`);
                     return;
                   });
                 }}
