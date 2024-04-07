@@ -9,10 +9,18 @@ import {
   setCurrentStep,
   updateCheckoutFormData,
 } from "@/redux/slices/checkoutSlice";
+import SimpleModal from "simple-react-modal";
 
 export default function PaymentMethodForm() {
   const dispatch = useDispatch();
   const currentStep = useSelector((store) => store.checkout.currentStep);
+  const [isCardModalOpen, setIsCardModalOpen] = useState(false);
+  const [cardDetails, setCardDetails] = useState({
+    cardNumber: "",
+    expirationDate: "",
+    cvv: "",
+  });
+
   const existingFormData = useSelector(
     (store) => store.checkout.checkoutFormData
   );
@@ -39,6 +47,29 @@ export default function PaymentMethodForm() {
     //Update the Current Step
     dispatch(setCurrentStep(currentStep + 1));
   }
+
+  const openCardModal = () => {
+    setIsCardModalOpen(true);
+  };
+
+  const closeCardModal = () => {
+    setIsCardModalOpen(false);
+  };
+
+  const handleCardDetailsChange = (e) => {
+    const { name, value } = e.target;
+    setCardDetails({
+      ...cardDetails,
+      [name]: value,
+    });
+  };
+
+  const submitCardDetails = () => {
+    // You can add further validation or processing here
+    console.log("Card details submitted:", cardDetails);
+    closeCardModal(); // Close the modal after submission
+  };
+
   return (
     <form onSubmit={handleSubmit(processData)}>
       <h2 className="text-xl font-semibold mb-4 dark:text-lime-400">
@@ -79,14 +110,17 @@ export default function PaymentMethodForm() {
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />
               </label>
             </li>
-            {/* <li>
+            <li>
               <input
                 type="radio"
                 id="hosting-big"
                 name="hosting"
                 value="Credit Card"
                 class="hidden peer"
-                onChange={(e) => setPaymentMethod(e.target.value)}
+                onChange={(e) => {
+                  setPaymentMethod(e.target.value);
+                  setIsCardModalOpen(true);
+                }}
               />
               <label
                 for="hosting-big"
@@ -102,11 +136,79 @@ export default function PaymentMethodForm() {
                 </div>
                 <Circle className="w-5 h-5 ms-3 flex-shrink-0" />
               </label>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
       <NavButtons />
+      <SimpleModal
+        show={isCardModalOpen}
+        onClose={closeCardModal}
+        width="500px"
+        height="auto"
+      >
+        <div className="p-8">
+          <h2 className="text-lg font-semibold mb-4 dark:text-lime-400">
+            Enter Card Details
+          </h2>
+          {/* Input fields for card details */}
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="cardNumber"
+            >
+              Card Number
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cardNumber"
+              name="cardNumber"
+              type="text"
+              value={cardDetails.cardNumber}
+              onChange={handleCardDetailsChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="expirationDate"
+            >
+              Expiration Date
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="expirationDate"
+              name="expirationDate"
+              type="text"
+              value={cardDetails.expirationDate}
+              onChange={handleCardDetailsChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="cvv"
+            >
+              CVV
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cvv"
+              name="cvv"
+              type="text"
+              value={cardDetails.cvv}
+              onChange={handleCardDetailsChange}
+            />
+          </div>
+          {/* Submit button */}
+          <button
+            className="bg-black text-white font-bold py-2 px-4 rounded mt-4"
+            onClick={submitCardDetails}
+          >
+            Submit
+          </button>
+        </div>
+      </SimpleModal>
     </form>
   );
 }
