@@ -11,6 +11,8 @@ import db from "@/lib/db";
 import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 import ConsultantList from "@/components/consultant/ConsultantList";
+import ContactUs from "@/components/frontend/ContactUs";
+import AboutUs from "@/components/frontend/AboutUs";
 export default async function Home() {
   const categoriesData = await getData("categories");
   const categories = categoriesData.filter((category) => {
@@ -73,6 +75,9 @@ export default async function Home() {
       {user?.role !== "CONSULTANT" && (
         <ConsultantList consultants={consultants} user={user} />
       )}
+      <ContactUs />
+
+      <AboutUs />
     </div>
   );
 }

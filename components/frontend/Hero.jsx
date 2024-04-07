@@ -15,7 +15,15 @@ export default async function Hero() {
     (category) => category.products.length > 0
   );
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 8,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <div
         style={{
           width: "100%",
@@ -57,23 +65,6 @@ export default async function Hero() {
           <div className="flex flex-col">
             <h2 className="uppercase text-sm">GREEN HARVEST COMMUNITY </h2>
             <p className="text-[0.6rem]">Community</p>
-          </div>
-        </Link>
-        <Link href="#" className="flex items-center space-x-1 mb-3">
-          <FolderSync className="shrink-0 w-5 h-5 dark:text-lime-500 text-slate-900" />
-          <div className="flex flex-col">
-            <h2 className="uppercase text-sm">Easy Return</h2>
-            <p className="text-[0.6rem]">Quick Return</p>
-          </div>
-        </Link>
-        <Link
-          href="/register-farmer"
-          className="flex items-center space-x-1 mb-6"
-        >
-          <CircleDollarSign className="shrink-0 w-5 h-5 dark:text-lime-500 text-slate-900" />
-          <div className="flex flex-col">
-            <h2 className="uppercase text-sm">Sell on Green Harvest </h2>
-            <p className="text-[0.6rem]">Million of Vistors</p>
           </div>
         </Link>
       </div>
