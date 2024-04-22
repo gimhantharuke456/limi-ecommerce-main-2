@@ -1,5 +1,5 @@
 "use client";
-import Image from "next/image";
+
 import React, { useContext, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -9,6 +9,7 @@ import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "@/firebaseConfig";
 import { ChatContext } from "@/context/ChatContex";
 import { useRouter } from "next/navigation";
+import ConsultantImage from "./ConsultantImage";
 const customModalOverlayClass = "custom-modal-overlay";
 export default async function ConsultantList({ consultants, user }) {
   const router = useRouter();
@@ -74,15 +75,7 @@ export default async function ConsultantList({ consultants, user }) {
                 key={index}
                 className="rounded-lg mr-3 bg-slate-100  dark:bg-slate-900 overflow-hidden cursor-pointer"
               >
-                <Image
-                  src={
-                    "https://utfs.io/f/4d0a7431-bb89-4db8-86e5-882d528cc023-no7jkf.webp"
-                  }
-                  alt={consultant.id}
-                  width={556}
-                  height={556}
-                  className="w-full h-48 object-cover"
-                />
+                <ConsultantImage id={consultant.id} />
                 <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 text-xl line-clamp-2">
                   {consultant.name}
                 </h2>

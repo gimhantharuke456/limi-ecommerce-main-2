@@ -22,12 +22,15 @@ import { isBase64Image } from "@/lib/utils";
 
 import { UserValidation } from "@/lib/validations/user";
 import { updateUser } from "@/lib/actions/user.actions";
+import { uploadFile } from "@/lib/services/uploadFileService";
 
 const AccountProfile = ({ user, btnTitle }) => {
   const router = useRouter();
   const pathname = usePathname();
   const { startUpload } = useUploadThing("media");
-
+  const [imageUploading, setSetImageUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+  const [profileUpdating, setProfileUpdating] = useState(false);
   const [files, setFiles] = useState([]);
 
   const form = useForm({
@@ -37,31 +40,27 @@ const AccountProfile = ({ user, btnTitle }) => {
       name: user?.name ? user.name : "",
       username: user?.username ? user.username : "",
       bio: user?.bio ? user.bio : "",
+      image: user?.image,
     },
   });
 
   const onSubmit = async (values) => {
-    const blob = values.profile_photo;
-
-    const hasImageChanged = isBase64Image(blob);
-    if (hasImageChanged) {
-      const imgRes = await startUpload(files);
-
-      if (imgRes && imgRes[0].fileUrl) {
-        values.profile_photo = imgRes[0].fileUrl;
-      }
-    }
-
     try {
+      console.log(values);
+      setProfileUpdating(true);
+      console.log(imageUrl);
       await updateUser({
         name: values.name,
         path: pathname,
         username: values.username,
         userId: user.id,
         bio: values.bio,
-        image: values.profile_photo,
+        image: imageUrl,
       });
-    } catch (err) {}
+    } catch (err) {
+    } finally {
+      setProfileUpdating(false);
+    }
 
     if (pathname === "/profile/edit") {
       router.back();
@@ -70,23 +69,23 @@ const AccountProfile = ({ user, btnTitle }) => {
     }
   };
 
-  const handleImage = (e, fieldChange) => {
+  const handleImage = async (e, fieldChange) => {
     e.preventDefault();
-
+    console.log("called");
     const fileReader = new FileReader();
 
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      setFiles(Array.from(e.target.files));
-
-      if (!file.type.includes("image")) return;
-
-      fileReader.onload = async (event) => {
-        const imageDataUrl = event.target?.result?.toString() || "";
-        fieldChange(imageDataUrl);
-      };
-
-      fileReader.readAsDataURL(file);
+      try {
+        setSetImageUploading(true);
+        const file = e.target.files[0];
+        console.log(file);
+        const url = await uploadFile(file);
+        setImageUrl(url);
+      } catch (err) {
+        console.log("upload filed failed");
+      } finally {
+        setSetImageUploading(false);
+      }
     }
   };
 
@@ -96,43 +95,47 @@ const AccountProfile = ({ user, btnTitle }) => {
         className="flex flex-col justify-start gap-10"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <FormField
-          control={form.control}
-          name="profile_photo"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-4">
-              <FormLabel className="account-form_image-label">
-                {field.value ? (
-                  <Image
-                    src={field.value}
-                    alt="profile_icon"
-                    width={96}
-                    height={96}
-                    priority
-                    className="rounded-full object-contain"
+        {imageUploading ? (
+          <p style={{ color: "white" }}>Uploading</p>
+        ) : (
+          <FormField
+            control={form.control}
+            name="profile_photo"
+            render={({ field }) => (
+              <FormItem className="flex items-center gap-4">
+                <FormLabel className="account-form_image-label">
+                  {field.value ? (
+                    <Image
+                      src={field.value}
+                      alt="profile_icon"
+                      width={96}
+                      height={96}
+                      priority
+                      className="rounded-full object-contain"
+                    />
+                  ) : (
+                    <Image
+                      src="/assets/profile.svg"
+                      alt="profile_icon"
+                      width={24}
+                      height={24}
+                      className="object-contain"
+                    />
+                  )}
+                </FormLabel>
+                <FormControl className="flex-1 text-base-semibold text-gray-200">
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    placeholder="Add profile photo"
+                    className="account-form_image-input"
+                    onChange={(e) => handleImage(e, field.onChange)}
                   />
-                ) : (
-                  <Image
-                    src="/assets/profile.svg"
-                    alt="profile_icon"
-                    width={24}
-                    height={24}
-                    className="object-contain"
-                  />
-                )}
-              </FormLabel>
-              <FormControl className="flex-1 text-base-semibold text-gray-200">
-                <Input
-                  type="file"
-                  accept="image/*"
-                  placeholder="Add profile photo"
-                  className="account-form_image-input"
-                  onChange={(e) => handleImage(e, field.onChange)}
-                />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        )}
 
         <FormField
           control={form.control}
@@ -194,9 +197,20 @@ const AccountProfile = ({ user, btnTitle }) => {
           )}
         />
 
-        <Button type="submit" className="bg-primary-500">
-          {btnTitle}
-        </Button>
+        {profileUpdating ? (
+          <p style={{ color: "white" }}>Updating</p>
+        ) : (
+          <Button
+            onClick={() => {
+              onSubmit(form.getValues());
+            }}
+            htmlType="submit"
+            type="submit"
+            className="bg-primary-500"
+          >
+            {btnTitle}
+          </Button>
+        )}
       </form>
     </Form>
   );
