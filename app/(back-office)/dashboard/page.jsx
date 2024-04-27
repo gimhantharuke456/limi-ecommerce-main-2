@@ -18,17 +18,5 @@ export default async function page() {
   if (role === "FARMER") {
     return <FarmerDashboard />;
   }
-  return (
-    <div>
-      <Heading title="Dashboard Overview" />
-      {/* Large Cards */}
-      {/* <LargeCards /> */}
-      {/* Small cards */}
-      {/* <SmallCards /> */}
-      {/* Charts */}
-      {/* <DashboardCharts /> */}
-      {/* Recent Orders Table */}
-      {/* <CustomDataTable /> */}
-    </div>
-  );
+  return <FarmerDashboard />;
 }
