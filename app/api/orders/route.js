@@ -67,7 +67,11 @@ export async function POST(request) {
       const sales = await Promise.all(
         orderItems.map(async (item) => {
           const totalAmount = parseFloat(item.salePrice) * parseInt(item.qty);
-
+          // Update product stock
+          await prisma.product.update({
+            where: { id: item.id },
+            data: { productStock: { decrement: parseInt(item.qty) } },
+          });
           const newSale = await prisma.sale.create({
             data: {
               orderId: newOrder.id,

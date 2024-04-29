@@ -9,9 +9,13 @@ export default async function MarketList() {
       {/* Market Slider */}
       <div className="bg-slate-50 dark:bg-lime-900 rounded-lg p-4">
         <h2 className="py-2 text-center text-2xl text-slate-900 dark:text-slate-50 mb-4">
-          Shop By Market
+          Get up close with nature on our farm tours
         </h2>
         <MarketsCarousel markets={markets} />
+        <h5 className="py-2 text-center  text-slate-900 dark:text-slate-50 mb-4">
+          Calling all tourists! Dive into the heart of our farm and enjoy
+          special discounts on immersive tours
+        </h5>
       </div>
     </div>
   );
