@@ -5,7 +5,6 @@ import CategoryList from "@/components/frontend/CategoryList";
 import { getData } from "@/lib/getData";
 
 import Image from "next/image";
-import Link from "next/link";
 
 export default async function page({ params: { slug } }) {
   const market = await getData(`markets/details/${slug}`);
