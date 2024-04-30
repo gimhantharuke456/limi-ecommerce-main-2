@@ -23,7 +23,7 @@ export default function FilterComponent({ category, products }) {
           <FilteredProducts
             isSearch={category?.isSearch}
             productCount={productCount}
-            products={products}
+            products={products ?? []}
           />
         </div>
       </div>

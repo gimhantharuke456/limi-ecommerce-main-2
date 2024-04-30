@@ -16,24 +16,27 @@ export default function Product({ product }) {
   }
   return (
     <div className="rounded-lg mr-3  bg-white dark:bg-slate-900 overflow-hidden border shadow">
-      <Link href={`/products/${product.slug}`}>
+      <Link href={`/products/${product?.slug}`}>
         <Image
-          src={product.imageUrl}
-          alt={product.title}
+          src={
+            product?.imageUrl ??
+            "https://media.istockphoto.com/id/1354776457/vector/default-image-icon-vector-missing-picture-page-for-website-design-or-mobile-app-no-photo.jpg?s=612x612&w=0&k=20&c=w3OW0wX3LyiFRuDHo9A32Q0IUMtD4yjXEvQlqyYk9O4="
+          }
+          alt={product?.title}
           width={556}
           height={556}
           className="w-full h-48 object-cover"
         />
       </Link>
       <div className="px-4">
-        <Link href={`/products/${product.slug}`}>
+        <Link href={`/products/${product?.slug}`}>
           <h2 className="text-center dark:text-slate-200 text-slate-800 my-2 font-semibold">
-            {product.title}
+            {product?.title}
           </h2>
         </Link>
         <div className="flex items-center justify-between gap-2 pb-3 dark:text-slate-200 text-slate-800">
           <p>
-            LKR {product.salePrice} (1 {product.unit})
+            LKR {product?.salePrice} (1 {product?.unit})
           </p>
           <button
             onClick={() => handleAddToCart()}
